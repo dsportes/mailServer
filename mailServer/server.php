@@ -24,10 +24,22 @@
  	'A' => $mailerA,
  	'B' => $mailerB
  );
- $ok = isset($_POST['cle']) && $_POST['cle'] == "rosesetmarguerites";
  
- if ($ok && isset($_POST['mailer'])) {
- 	$mailer = $mailers[$_POST['mailer']];
+ $test = array(
+ 	'cle' => "rosesetmarguerites",
+ 	'mailer' => "B",
+ 	'to' => "daniel@sportes.fr",
+ 	'subject' => "TEST - Mon sujet",
+ 	'text' => "TEST - Mon texte"
+ );
+ 
+ $arg = $_POST;
+ // $arg = $test;
+ 
+ $ok = isset($arg['cle']) && $arg['cle'] == "rosesetmarguerites";
+ 
+ if ($ok && isset($arg['mailer'])) {
+ 	$mailer = $mailers[$arg['mailer']];
  	if (isset($mailer))
  		$from = $mailer['username'];
  	else
@@ -35,20 +47,20 @@
  } else 
  	$ok = false;
  
- if ($ok && isset($_POST['to'])) {
- 	$to = explode(",", $_POST['to']);
+ if ($ok && isset($arg['to'])) {
+ 	$to = explode(",", $arg['to']);
  	if (!isset($to) || count($to) <= 0)
  		$ok = false;
  } else 
  	$ok = false;
  
- if ($ok && isset($_POST['subject']))
- 	$subject = $_POST['subject'];
+ if ($ok && isset($arg['subject']))
+ 	$subject = $arg['subject'];
  else
  	$ok = false;
  
- if ($ok && isset($_POST['text']))
- 	$text = $_POST['text'];
+ if ($ok && isset($arg['text']))
+ 	$text = $arg['text'];
  else
  	$ok = false;
  
@@ -59,8 +71,8 @@
  	try {
  		$mail = new PHPMailer;
  		$mail->CharSet = "UTF-8";
- 		// $mail->isSMTP(); // Set mailer to use SMTP
-		$mail->isMail(); // isSMTP() ne marche pas chez 1and1 ; Set mailer to use SMTP	
+ 		// $mail->isSMTP(); // Set mailer to use SMTP : ne marche pas chez 1and1 ;
+		$mail->isMail(); // marche chez 1and1 ;	
  		$mail->Host = $mailer['host']; // Specify main and backup server
  		$mail->SMTPAuth = true; // Enable SMTP authentication
  		$mail->Username = $mailer['username']; // SMTP username
@@ -79,9 +91,10 @@
  		$mail->Subject = $subject;
  		$mail->Body = $text;
  		
- 		if(!$mail->send())
+ 		if(!$mail->send()) {
  			$err = "KO : ".$mail->ErrorInfo;
- 		else
+ 			// error_log($err);
+ 		} else
  			$err = "OK : ".$date;
  
  	} catch (Exception $e) {

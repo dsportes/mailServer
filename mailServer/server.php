@@ -19,10 +19,19 @@
  	// 'secure' => 'tls' or 'ssl' ; // (fac)
  	'auth' => true
  );
+
+ $mailerC = array(
+ 		'name' => '[Alterconsos App]',
+ 		'host'=> 'ssl0.ovh.net',
+ 		'port' => '465',
+ 		'username' => 'app@alterconsos.fr',
+ 		'password' => 'lesroses2015',
+ 		'auth' => true
+ );
  
  $mailers = array(
- 	'A' => $mailerA,
- 	'B' => $mailerB
+ 	'A' => $mailerC,
+ 	'B' => $mailerC
  );
  
  $test = array(

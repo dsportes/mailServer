@@ -6,7 +6,7 @@
  	'host'=> 'mail.gandi.net',
  	'port' => '587',
  	'username' => 'l-hay@alterconsos.net',
- 	'password' => 'lesroses',
+ 	'password' => '$pwd1',
  	'auth' => true
  );
  
@@ -15,7 +15,7 @@
  	'host'=> 'auth.smtp.1and1.fr',
  	'port' => '587',
  	'username' => 'hayjp@alterconsos.sportes.fr',
- 	'password' => 'lesmarguerites',
+ 	'password' => '$pwd3',
  	// 'secure' => 'tls' or 'ssl' ; // (fac)
  	'auth' => true
  );
@@ -25,7 +25,7 @@
  		'host'=> 'ssl0.ovh.net',
  		'port' => '465',
  		'username' => 'app@alterconsos.fr',
- 		'password' => 'lesroses2015',
+ 		'password' => '$pwd2',
  		'auth' => true
  );
  
@@ -35,7 +35,7 @@
  );
  
  $test = array(
- 	'cle' => "rosesetmarguerites",
+ 	'cle' => "$pwd4",
  	'mailer' => "B",
  	'to' => "daniel@sportes.fr",
  	'subject' => "TEST - Mon sujet",
@@ -45,7 +45,7 @@
  $arg = $_POST;
  // $arg = $test;
  
- $ok = isset($arg['cle']) && $arg['cle'] == "rosesetmarguerites";
+ $ok = isset($arg['cle']) && $arg['cle'] == "$pwd4";
  
  if ($ok && isset($arg['mailer'])) {
  	$mailer = $mailers[$arg['mailer']];

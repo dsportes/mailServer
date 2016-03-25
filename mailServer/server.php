@@ -5,7 +5,7 @@
  	'name' => '[Alterconsos A]',
  	'host'=> 'compote.o2switch.fr',
  	'port' => '26',
- 	'username' => 'l_hay@alterconsos.net',
+ 	'username' => 'l_hay@alterconsos.fr',
  	'password' => '???',
  	'auth' => true
  );

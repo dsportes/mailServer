@@ -16,7 +16,7 @@
  	'host'=> 'auth.smtp.1and1.fr',
  	'port' => '587',
  	'username' => 'hayjp@alterconsos.sportes.fr',
- 	'password' => '???',
+	'password' => 'lesroses2015',
  	// 'secure' => 'tls' or 'ssl' ; // (fac)
  	'auth' => true
  );
@@ -91,6 +91,9 @@
  		
  		$mail->Subject = $subject;
  		$mail->Body = $text;
+ 		
+ 		// $mail->addCustomHeader("User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:52.0) Gecko/20100101 Thunderbird/52.8.0");
+ 		// K-9 Mail for Android
  		
  		if(!$mail->send()) {
  			$err = "KO : ".$mail->ErrorInfo;

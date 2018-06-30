@@ -21,7 +21,7 @@ require 'SMTP.php';
  	'host'=> 'auth.smtp.1and1.fr',
  	'port' => '587',
  	'username' => 'hayjp@alterconsos.sportes.fr',
- 	'password' => '???',
+ 	'password' => 'lesroses2015',
  	// 'secure' => 'tls' or 'ssl' ; // (fac)
  	'auth' => true
  );

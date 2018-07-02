@@ -89,7 +89,8 @@ if ($ok) {
 		// 0 = off (for production use)
 		// 1 = client messages
 		// 2 = client and server messages
-		$mail->SMTPDebug = 0;
+		if (isset($arg['debug']))
+			$mail->SMTPDebug = $arg['debug'];
 
  		$mail->Host = $mailer['host']; // Specify main and backup server
 		$mail->Port = $mailer['port'];

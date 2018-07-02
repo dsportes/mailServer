@@ -1,18 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Alterconsos, test d'envoi de mail</title>
-<meta http-equiv="cache-control" content="no-cache">
-<meta http-equiv="pragma" content="no-cache">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Test d'envoi de mail</title>
 </head>
 <body>
 <!--
-form action="http://alterconsos.sportes.fr/server.php" method="post"
-form action="http://alterconsos.fr/tech/server.php" method="post" 
-form action="http://192.168.0.1/MailServer/server.php" method="post"
+form action="http://alterconsos.sportes.fr/server3m.php" method="post"
+form action="http://alterconsos.fr/tech/server3s.php" method="post" 
+form action="http://localhost:8080/MailServer/server3.php" method="post"  // ne marche pas
 -->
-<form action="http://alterconsos.fr/tech/server.php" method="post">
+<form action="http://alterconsos.fr/tech/server3s.php" method="post">
  	<p>mailer : <input type="text" name="mailer" value="B" /></p>
  	<p>to : <input type="text" name="to" value="daniel@sportes.fr" /></p>
  	<p>subject : <input type="text" name="subject" value="Mon sujet"/></p>

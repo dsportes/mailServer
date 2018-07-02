@@ -14,7 +14,7 @@ require 'Exception.php';
 require 'PHPMailer.php';
 require 'SMTP.php';
  
-// 'secure' => 'tls' or 'ssl' ou absent
+// 'secure' => 'tls' ou 'ssl' ou 'starttls' ou absent
  
 $mailerA = array(
  	'name' => '[Alterconsos A]',
@@ -33,7 +33,6 @@ $mailerB = array(
  	'username' => 'hayjp@alterconsos.sportes.fr',
  	'password' => 'lesroses2015',
  	'secure' => 'tls',
- 	// 'secure' => 'tls' or 'ssl' ; // (fac)
  	'auth' => true
 );
  
@@ -85,6 +84,14 @@ if ($ok) {
 		$mail->isSMTP(); 
 		// $mail->isMail(); // SMTP marche pas chez 1and1 ;	
 		
+		$mail->SMTPOptions = array(
+			'ssl' => array(
+				'verify_peer' => false,
+				'verify_peer_name' => false,
+				'allow_self_signed' => true
+			)
+		);
+
 		//Enable SMTP debugging
 		// 0 = off (for production use)
 		// 1 = client messages

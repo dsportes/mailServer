@@ -20,8 +20,7 @@ $mailerA = array(
  	'name' => '[Alterconsos A]',
  	'host'=> 'compote.o2switch.net',
  	'port' => '465',
- 	'username' => 'app@alterconsos.fr',
- 	'password' => 'lesroses2015',
+ 	'username' => 'appli.hebdo@alterconsos.fr',
  	'secure' => 'ssl',
  	'auth' => true
 );
@@ -30,8 +29,7 @@ $mailerB = array(
  	'name' => '[Alterconsos B]',
  	'host'=> 'auth.smtp.1and1.fr',
  	'port' => '587',
- 	'username' => 'hayjp@alterconsos.sportes.fr',
- 	'password' => 'lesroses2015',
+ 	'username' => 'appli.hebdo@alterconsos.sportes.fr',
  	'secure' => 'tls',
  	// 'secure' => 'tls' or 'ssl' ; // (fac)
  	'auth' => true
@@ -43,15 +41,17 @@ $mailers = array(
 );
 
 $arg = $_POST;
- 
-$ok = isset($arg['cle']) && $arg['cle'] == "rosesetmarguerites";
+
+$ok = isset($arg['mdp']);
+$smtp = isset($arg['smtp']);
 
 
 if ($ok && isset($arg['mailer'])) {
  	$mailer = $mailers[$arg['mailer']];
- 	if (isset($mailer))
+ 	if (isset($mailer)) {
+ 		$mdp = $arg['mdp'];
  		$from = $mailer['username'];
- 	else
+ 	} else
  		$ok = false;
 } else 
  	$ok = false;
@@ -82,8 +82,10 @@ if ($ok) {
  		$mail->CharSet = "UTF-8";
 		
 		//Tell PHPMailer to use SMTP : ne marche pas chez 1and1 ;
-		// $mail->isSMTP(); 
-		$mail->isMail(); // SMTP marche pas chez 1and1 ;	
+		if ($smtp) 
+			$mail->isSMTP(); 
+		else
+			$mail->isMail(); // SMTP marche pas chez 1and1 ;	
 		
 		//Enable SMTP debugging
 		// 0 = off (for production use)
@@ -95,7 +97,7 @@ if ($ok) {
 		$mail->Port = $mailer['port'];
  		$mail->SMTPAuth = true; // Enable SMTP authentication
  		$mail->Username = $mailer['username']; // SMTP username
- 		$mail->Password = $mailer['password']; // SMTP password
+ 		$mail->Password = $mdp;
   		if (isset($mailer['secure']))
  			$mail->SMTPSecure = $mailer['secure']; // 'tls' Enable encryption, 'ssl' also accepted
   		

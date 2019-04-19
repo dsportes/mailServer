@@ -22,7 +22,8 @@ $mailerA = array(
  	'port' => '465',
  	'username' => 'appli.hebdo@alterconsos.fr',
  	'secure' => 'ssl',
- 	'auth' => true
+ 	'auth' => true,
+ 	'smtp' => true
 );
  
 $mailerB = array(
@@ -32,7 +33,8 @@ $mailerB = array(
  	'username' => 'appli.hebdo@alterconsos.sportes.fr',
  	'secure' => 'tls',
  	// 'secure' => 'tls' or 'ssl' ; // (fac)
- 	'auth' => true
+ 	'auth' => true,
+ 	'smtp' => false
 );
  
 $mailers = array(
@@ -43,8 +45,6 @@ $mailers = array(
 $arg = $_POST;
 
 $ok = isset($arg['mdp']);
-$smtp = isset($arg['smtp']);
-
 
 if ($ok && isset($arg['mailer'])) {
  	$mailer = $mailers[$arg['mailer']];
@@ -55,6 +55,9 @@ if ($ok && isset($arg['mailer'])) {
  		$ok = false;
 } else 
  	$ok = false;
+
+// $smtp = isset($arg['smtp']);
+$smtp = $mailer[smtp];
  
 if ($ok && isset($arg['to'])) {
  	$to = explode(",", $arg['to']);
@@ -111,12 +114,13 @@ if ($ok) {
  		
  		$mail->Body = $text;
  		
+ 		$msg1 = $date . " " . $subject . " " . strlen($text) . "c " . $arg['to'];
+ 		error_log($msg1);
  		if(!$mail->send()) {
  			$err = "KO : ".$mail->ErrorInfo;
- 			// error_log($err);
  		} else
  			$err = "OK : ".$date;
-
+		
 
  	} catch (Exception $e) {
  		$err = "KO : ".$e->getMessage();
@@ -128,4 +132,6 @@ if ($ok)
 else 
 	echo $date;
   
+error_log($err);
+
 ?>
